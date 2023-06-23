@@ -4,8 +4,11 @@
 .spacebetween {
     justify-content: space-between;
 }
-.header {
+.margin-10 {
     margin: 10px;
+}
+.padding-right {
+    padding: 5px;
 }
 .block {
     display: flex;
@@ -14,6 +17,10 @@
     text-align: center;
     justify-content: center;
 }
+.text-alignLeft {
+    text-align: left;
+}
+
 .buttons {
     background-color: purple;
     color: white;
@@ -27,5 +34,20 @@
 }
 
 #viewHighscores:hover {
+    cursor: pointer;
+}
+
+/* MultiChoice list area */
+#multiChoice li {
+    background-color: purple;
+    width: fit-content;
+    margin: 2px;
+    padding: 2px;
+    border-radius: 5px;
+    color: white;
+    list-style: none;
+}
+#multiChoice li:hover {
+    opacity: 80%;
     cursor: pointer;
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./Assets/css/style.css" />
   </head>
   <body>
-    <header class="flex spacebetween header">
+    <header class="flex spacebetween margin-10">
       <div id="viewHighscores"></div>
       <!-- Timer is used for timer -->
       <div><span id="timeLabel"></span><span id="timer"></span></div>
@@ -15,13 +15,36 @@
     <main>
       <section class="block centeralign">
         <div class="max-width">
-          <!-- Primary is used for heading and questions -->
+          <!-- h1Blank is used for heading and questions -->
           <h1 id="h1Blank"></h1>
-          <!-- Secondary is used for instructions and questions -->
-          <p id="pBlank">
-           
-          </p>
+          <!-- pBlank is used for instructions -->
+          <section>
+            <p id="pBlank"></p>
+            <!-- questions is used for multiple choice answers -->
+            <ol id="multiChoice" class="text-alignLeft">
+                
+            </ol>
+          </section>
+          <!--Highscore area-->
+          <div class="highScoreArea" id="highScoreArea">
+            <div class="highScoreList">
+              <ol id="highScoreList" class="text-alignLeft">
+              </ol>
+            </div>
+            <!-- Area to enter initials -->
+            <div class="margin-10" id="enter-initials">
+              <span class="padding-right">Enter Initials:</span><input />
+              <button class="buttons">Submit</button>
+            </div>
+            <!-- High Score buttons -->
+            <div id="highScoreButtons">
+              <button class="buttons" id="goBack">Go Back</button>
+              <button class="buttons" id="clearHigh">Clear Highscores</button>
+            </div>
+          </div>
+          <!-- Correct/Incorrect box -->
           <p id="correct"></p>
+          <!-- Start Quiz Button -->
           <button class="buttons" id="startButton">Start Quiz</button>
         </div>
       </section>
