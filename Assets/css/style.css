@@ -1,0 +1,24 @@
+.flex {
+    display: flex;
+}
+.spacebetween {
+    justify-content: space-between;
+}
+.header {
+    margin: 10px;
+}
+.block {
+    display: flex;
+}
+.centeralign {
+    text-align: center;
+    justify-content: center;
+}
+.buttons {
+    background-color: purple;
+    color: white;
+    border-radius: 5px;
+}
+.max-width {
+    max-width: 500px
+}
