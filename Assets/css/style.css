@@ -22,3 +22,10 @@
 .max-width {
     max-width: 500px
 }
+#viewHighscores {
+    color: purple;   
+}
+
+#viewHighscores:hover {
+    cursor: pointer;
+}
