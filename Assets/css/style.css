@@ -4,14 +4,14 @@
 .spacebetween {
     justify-content: space-between;
 }
-.margin-10 {
-    margin: 10px;
+.margin-head {
+    margin: 10px 20px 50px;
 }
 .padding-right {
     padding: 5px;
 }
 .block {
-    display: flex;
+    display: block;
 }
 .centeralign {
     text-align: center;
