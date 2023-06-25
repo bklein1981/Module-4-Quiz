@@ -1,12 +1,20 @@
 var Header = document.querySelector("#Header")
 var startPageArea = document.querySelector("#startArea"); //starting page area
 var questionArea = document.querySelector("#questionArea"); //question area
+var multiChoiceList = document.querySelector("#multiChoice")
 var finalScoreArea = document.querySelector("#finalScoreArea");//final score area
 var highScoreArea = document.querySelector("#highScoreArea")//high score area
 var viewHighScore = document.querySelector("#viewHighscores"); //label which says highscores
 var startButton = document.querySelector("#startButton"); //start button
 var countdown = document.querySelector("#timer"); //Timer countdown
 var goBack = document.querySelector("#goBack"); //Go Back Button
+
+//set variables
+var timeLeft
+var ans1 = document.createElement("li");
+var ans2 = document.createElement("li");
+var ans3 = document.createElement("li");
+var ans4 = document.createElement("li");
 
 
 //Initiate function gives starting page 
@@ -18,27 +26,38 @@ function init() {
     highScoreArea.setAttribute("style", "display: none;");
 }
 
+// timer function
 function timer() {
-var timeLeft = 60;
+    timeLeft = 60;
   var timeInterval = setInterval(function () {
-    if (timeLeft > 0) {
-      countdown.textContent = timeLeft;
-      timeLeft--;
-    } else {
-      timeLeft = 0;
+    timeLeft--
+    countdown.textContent = timeLeft;
+    if (timeLeft < 0) {
       countdown.textContent = '';
       clearInterval(timeInterval);
-      
+      timesup();
       init();
     }
   }, 100);
 }
 
+function timesup() {
+    window.alert("Times up. Sorry!")
+}
+
+function resetMultiChoice() {
+    multiChoiceList.removeChild(ans1)
+    multiChoiceList.removeChild(ans2)
+    multiChoiceList.removeChild(ans3)
+    multiChoiceList.removeChild(ans4)  
+}
+
 function questionOne() {
-    var ans1 = document.createElement("li");
-    var ans2 = document.createElement("li");
-    var ans3 = document.createElement("li");
-    var ans4 = document.createElement("li");
+    
+    ans1 = document.createElement("li");
+    ans2 = document.createElement("li");
+    ans3 = document.createElement("li");
+    ans4 = document.createElement("li");
     ans1.textContent = "Strings";
     ans2.textContent = "Booleans";
     ans3.textContent = "Alerts";
@@ -48,13 +67,15 @@ function questionOne() {
     multiChoiceList.appendChild(ans2);
     multiChoiceList.appendChild(ans3);
     multiChoiceList.appendChild(ans4);
+
+
 }
 
 function questionTwo() {
-    var ans1 = document.createElement("li");
-    var ans2 = document.createElement("li");
-    var ans3 = document.createElement("li");
-    var ans4 = document.createElement("li");
+    ans1 = document.createElement("li");
+    ans2 = document.createElement("li");
+    ans3 = document.createElement("li");
+    ans4 = document.createElement("li");
     ans1.textContent = "Parenthesis";
     ans2.textContent = "Quotes";
     ans3.textContent = "Brackets";
@@ -67,10 +88,10 @@ function questionTwo() {
 }
 
 function questionThree() {
-    var ans1 = document.createElement("li");
-    var ans2 = document.createElement("li");
-    var ans3 = document.createElement("li");
-    var ans4 = document.createElement("li");
+    ans1 = document.createElement("li");
+    ans2 = document.createElement("li");
+    ans3 = document.createElement("li");
+    ans4 = document.createElement("li");
     ans1.textContent = "Numbers and strings";
     ans2.textContent = "Other arrays";
     ans3.textContent = "Booleans";
@@ -83,10 +104,10 @@ function questionThree() {
 }
 
 function questionFour() {
-    var ans1 = document.createElement("li");
-    var ans2 = document.createElement("li");
-    var ans3 = document.createElement("li");
-    var ans4 = document.createElement("li");
+    ans1 = document.createElement("li");
+    ans2 = document.createElement("li");
+    ans3 = document.createElement("li");
+    ans4 = document.createElement("li");
     ans1.textContent = "Dollar signs";
     ans2.textContent = "Parenthesis";
     ans3.textContent = "Quotation Marks";
@@ -128,6 +149,7 @@ viewHighScore.addEventListener("click", function () {
     startPageArea.setAttribute("style", "display: none;");
     questionArea.setAttribute("style", "display: content;");
     timer();
+    questionOne();
   })
 
   goBack.addEventListener("click", function () {
