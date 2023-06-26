@@ -2,26 +2,31 @@ var Header = document.querySelector("#Header");
 var startPageArea = document.querySelector("#startArea"); //starting page area
 var questionArea = document.querySelector("#questionArea"); //question area
 var multiChoiceList = document.querySelector("#multiChoice"); // multiChoice List
-var correct = document.querySelector("#correct");// Correct field
+var correct = document.querySelector("#correct"); // Correct field
 var finalScoreArea = document.querySelector("#finalScoreArea"); //final score area
+var finalScoreOutput = document.querySelector("#finalScoreOutput"); //shows final score
+var submitButton = document.querySelector("#submitButton");//submit button
+var submitField = document.getElementById("submitField")//initials
 var highScoreArea = document.querySelector("#highScoreArea"); //high score area
 var viewHighScore = document.querySelector("#viewHighscores"); //label which says highscores
 var startButton = document.querySelector("#startButton"); //start button
 var countdown = document.querySelector("#timer"); //Timer countdown
 var goBack = document.querySelector("#goBack"); //Go Back Button
-
+var entriesFromLocalStorage = JSON.parse(localStorage.getItem("entries") || '[]');
 
 //set variables
-var score = 0
-var answer
+var allDone;
+var score = 0;
+var answer;
 var timeLeft;
 var ans1 = document.createElement("li");
 var ans2 = document.createElement("li");
 var ans3 = document.createElement("li");
 var ans4 = document.createElement("li");
 
-//var li = document.createElement("li");
-//li.className = "row";
+//create arrays
+highScore = [];
+highName = [];
 
 //Initiate function gives starting page
 function init() {
@@ -30,6 +35,15 @@ function init() {
   questionArea.setAttribute("style", "display: none;");
   finalScoreArea.setAttribute("style", "display: none;");
   highScoreArea.setAttribute("style", "display: none;");
+}
+
+function finalScore() {
+  Header.setAttribute("style", "visibility: hidden;");
+  startPageArea.setAttribute("style", "display: none;");
+  questionArea.setAttribute("style", "display: none;");
+  finalScoreArea.setAttribute("style", "display: content;");
+  highScoreArea.setAttribute("style", "display: none;");
+  finalScoreOutput.innerHTML = score
 }
 
 // timer function
@@ -43,20 +57,23 @@ function timer() {
       clearInterval(timeInterval);
       timesup();
       init();
+    } else if (allDone === true) {
+      clearInterval(timeInterval);
+      countdown.textContent = "";
     }
   }, 1000);
 }
 
+//secondary timer for correct/incorrect to stay up on screen
 function secondaryTimer() {
-    var secondTime = 2;
-    var timeInterval = setInterval(function () {
-        secondTime--;
-        if (secondTime < 0) {
-        correct.textContent = ""
-        clearInterval(secondTime);
+  var secondTime = 5;
+  var timeInterval = setInterval(function () {
+    secondTime--;
+    if (secondTime < 0) {
+      correct.textContent = "";
+      clearInterval(timeInterval);
     }
-    }, 1000)
-    
+  }, 100);
 }
 
 //Adds an alert if the quiz isnt finished in time
@@ -116,14 +133,13 @@ function questionOne() {
   questionLi.forEach((row) => {
     row.addEventListener("click", function handleClick(event) {
       if (row.textContent === "Alerts") {
-        correct.textContent = "Correct!"
-        score = score + 5
+        correct.textContent = "Correct!";
+        score = score + 5;
         secondaryTimer();
         resetMultiChoice();
         questionTwo();
-        console.log(score)
-      }else {
-        correct.textContent = "Incorrect!"
+      } else {
+        correct.textContent = "Incorrect!";
         secondaryTimer();
         resetMultiChoice();
         questionTwo();
@@ -149,14 +165,13 @@ function questionTwo() {
   questionLi.forEach((row) => {
     row.addEventListener("click", function handleClick(event) {
       if (row.textContent === "Parenthesis") {
-        correct.textContent = "Correct!"
-        score = score + 5
+        correct.textContent = "Correct!";
+        score = score + 5;
         secondaryTimer();
         resetMultiChoice();
         questionThree();
-        console.log(score)
-      }else {
-        correct.textContent = "Incorrect!"
+      } else {
+        correct.textContent = "Incorrect!";
         secondaryTimer();
         resetMultiChoice();
         questionThree();
@@ -181,14 +196,13 @@ function questionThree() {
   questionLi.forEach((row) => {
     row.addEventListener("click", function handleClick(event) {
       if (row.textContent === "All of the above") {
-        correct.textContent = "Correct!"
-        score = score + 5
+        correct.textContent = "Correct!";
+        score = score + 5;
         secondaryTimer();
         resetMultiChoice();
         questionFour();
-        console.log(score)
-      }else {
-        correct.textContent = "Incorrect!"
+      } else {
+        correct.textContent = "Incorrect!";
         secondaryTimer();
         resetMultiChoice();
         questionFour();
@@ -214,14 +228,13 @@ function questionFour() {
   questionLi.forEach((row) => {
     row.addEventListener("click", function handleClick(event) {
       if (row.textContent === "Quotation Marks") {
-        correct.textContent = "Correct!"
-        score = score + 5
+        correct.textContent = "Correct!";
+        score = score + 5;
         secondaryTimer();
         resetMultiChoice();
         questionFive();
-        console.log(score)
-      }else {
-        correct.textContent = "Incorrect!"
+      } else {
+        correct.textContent = "Incorrect!";
         secondaryTimer();
         resetMultiChoice();
         questionFive();
@@ -246,16 +259,18 @@ function questionFive() {
   questionLi.forEach((row) => {
     row.addEventListener("click", function handleClick(event) {
       if (row.textContent === "Console") {
-        correct.textContent = "Correct!"
-        score = score + 5
+        correct.textContent = "Correct!";
+        score = score + 5;
         secondaryTimer();
         resetMultiChoice();
-        console.log(score);
-      }else {
-        correct.textContent = "Incorrect!"
+        finalScore();
+        allDone = true;
+      } else {
+        correct.textContent = "Incorrect!";
         secondaryTimer();
         resetMultiChoice();
-        
+        finalScore();
+        allDone = true;
       }
     });
   });
@@ -263,21 +278,58 @@ function questionFive() {
 
 init();
 
+//View HighScore Area
 viewHighScore.addEventListener("click", function () {
   Header.setAttribute("style", "visibility: hidden;");
   startPageArea.setAttribute("style", "display: none;");
   questionArea.setAttribute("style", "display: none;");
   finalScoreArea.setAttribute("style", "display: none;");
   highScoreArea.setAttribute("style", "display: content;");
+  displayHighScores();
 });
 
+//Start Button
 startButton.addEventListener("click", function () {
+  score = 0;
   startPageArea.setAttribute("style", "display: none;");
   questionArea.setAttribute("style", "display: content;");
+  allDone = false;
   timer();
   questionOne();
 });
 
+//Go Back Button
 goBack.addEventListener("click", function () {
-  init();
+    init();
 });
+
+//FinalScore submit high score buttons
+submitButton.addEventListener("click", function (event) {
+event.preventDefault();
+   var finalScoreNumber = score;
+   if(finalScoreNumber === 0) {
+    window.alert("Sorry you cannot log a highscore of 0.");
+    init();
+   }else {
+    highScore.push(finalScoreNumber);
+    highName.push(submitField.value);
+    localStorage.setItem("highScoreArray", JSON.stringify(highScore));
+    localStorage.setItem("highNameArray", JSON.stringify(highName));
+    init();
+    }
+    console.log(localStorage);
+})
+
+function displayHighScores() {
+    localStorage.getItem("highScoreArray");
+    localStorage.getItem("highNameArray");
+    for (var i = 0; i < highScore.length; i++) {
+        console.log(highScore[i]);
+        console.log(highName[i]);
+    }
+}
+
+//issue1: how to add local storage items to highscore area
+//issue2: multi-choice questions not aligning right
+//issue3: reseting multichoice questions if view Highscores button is hit
+//issue4: timer reducing by 10 seconds when incorrect answer is given 
