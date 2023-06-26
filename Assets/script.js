@@ -1,4 +1,4 @@
-var Header = document.querySelector("#Header");
+var header = document.querySelector("#Header");
 var startPageArea = document.querySelector("#startArea"); //starting page area
 var questionArea = document.querySelector("#questionArea"); //question area
 var multiChoiceList = document.querySelector("#multiChoice"); // multiChoice List
@@ -30,7 +30,7 @@ highName = [];
 
 //Initiate function gives starting page
 function init() {
-  Header.setAttribute("style", "visibility: visible;");
+  header.setAttribute("style", "visibility: visible;");
   startPageArea.setAttribute("style", "display: content;");
   questionArea.setAttribute("style", "display: none;");
   finalScoreArea.setAttribute("style", "display: none;");
@@ -39,7 +39,7 @@ function init() {
 
 //sets Final Score area
 function finalScore() {
-  Header.setAttribute("style", "visibility: hidden;");
+  header.setAttribute("style", "visibility: hidden;");
   startPageArea.setAttribute("style", "display: none;");
   questionArea.setAttribute("style", "display: none;");
   finalScoreArea.setAttribute("style", "display: content;");
@@ -284,7 +284,7 @@ function questionFive() {
 
 //View HighScore Area
 viewHighScore.addEventListener("click", function () {
-  Header.setAttribute("style", "visibility: hidden;");
+  header.setAttribute("style", "visibility: hidden;");
   startPageArea.setAttribute("style", "display: none;");
   questionArea.setAttribute("style", "display: none;");
   finalScoreArea.setAttribute("style", "display: none;");
