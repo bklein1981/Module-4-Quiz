@@ -12,7 +12,7 @@ var viewHighScore = document.querySelector("#viewHighscores"); //label which say
 var startButton = document.querySelector("#startButton"); //start button
 var countdown = document.querySelector("#timer"); //Timer countdown
 var goBack = document.querySelector("#goBack"); //Go Back Button
-var entriesFromLocalStorage = JSON.parse(localStorage.getItem("entries") || '[]');
+var clearHigh = document.querySelector("#clearHigh"); //clear highscore button
 
 //set variables
 var allDone;
@@ -37,6 +37,7 @@ function init() {
   highScoreArea.setAttribute("style", "display: none;");
 }
 
+//sets Final Score area
 function finalScore() {
   Header.setAttribute("style", "visibility: hidden;");
   startPageArea.setAttribute("style", "display: none;");
@@ -117,6 +118,7 @@ function addClassName() {
   li.className = "row";
 }
 
+//Question 1
 function questionOne() {
   addClassName();
   createLiItems();
@@ -148,6 +150,7 @@ function questionOne() {
   });
 }
 
+//Question 2
 function questionTwo() {
   addClassName();
   createLiItems();
@@ -180,6 +183,7 @@ function questionTwo() {
   });
 }
 
+//Question 3
 function questionThree() {
   addClassName();
   createLiItems();
@@ -211,6 +215,7 @@ function questionThree() {
   });
 }
 
+//Question 4
 function questionFour() {
   addClassName();
   createLiItems();
@@ -243,6 +248,7 @@ function questionFour() {
   });
 }
 
+//Question5
 function questionFive() {
   addClassName();
   createLiItems();
@@ -275,8 +281,6 @@ function questionFive() {
     });
   });
 }
-
-init();
 
 //View HighScore Area
 viewHighScore.addEventListener("click", function () {
@@ -320,6 +324,7 @@ event.preventDefault();
     console.log(localStorage);
 })
 
+//Displays HighScores
 function displayHighScores() {
     localStorage.getItem("highScoreArray");
     localStorage.getItem("highNameArray");
@@ -329,6 +334,18 @@ function displayHighScores() {
     }
 }
 
+//Clears HighScores
+clearHigh.addEventListener("click", function() {
+    localStorage.getItem("highScoreArray");
+    localStorage.getItem("highNameArray");
+    for (var i = 0; i < highScore.length; i++) {
+        highScore[i] = "";
+        highName[i] = "";
+    }
+    console.log(highScore[0]);
+})
+
+init();
 //issue1: how to add local storage items to highscore area
 //issue2: multi-choice questions not aligning right
 //issue3: reseting multichoice questions if view Highscores button is hit
