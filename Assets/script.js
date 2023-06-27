@@ -23,6 +23,8 @@ var ans1 = document.createElement("li");
 var ans2 = document.createElement("li");
 var ans3 = document.createElement("li");
 var ans4 = document.createElement("li");
+var storedScore = []
+var highScoreLi
 
 //create arrays
 highScore = [];
@@ -305,6 +307,7 @@ startButton.addEventListener("click", function () {
   questionArea.setAttribute("style", "display: content;");
   viewHighScore.style.visibility = "hidden";
   allDone = false;
+  timeLeft = 60
   timer();
   questionOne();
 });
@@ -333,20 +336,24 @@ event.preventDefault();
 
 //Displays HighScores
 function displayHighScores() {
-    var storedScore = JSON.parse(localStorage.getItem("highScoreArray"));
+    storedScore = JSON.parse(localStorage.getItem("highScoreArray"));
     var storedNames = JSON.parse(localStorage.getItem("highNameArray"));
     for (var i = 0; i < storedScore.length; i++) {
-        var highScoreLi = document.createElement("li");
+        highScoreLi = document.createElement("li");
         highScoreLi.textContent = "Name: " + storedNames[i] + " Score: " + storedScore[i];
         highScoreList.appendChild(highScoreLi);
     }
-    console.log(localStorage);
-    console.log(highScore.length);
+  
+    
 }
 
 //Clears HighScores
 clearHigh.addEventListener("click", function() {
     localStorage.clear();
+    for(var i = 0; i <storedScore.length; i++) {
+      highScoreList.removeChild(highScoreLi);
+    }
+
 })
 
 init();
