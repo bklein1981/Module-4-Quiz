@@ -19,6 +19,7 @@
 }
 .text-alignLeft {
     text-align: left;
+    padding-left: 0;
 }
 
 .buttons {
@@ -30,7 +31,7 @@
     max-width: 500px
 }
 #viewHighscores {
-    color: purple;   
+    color: purple; 
 }
 
 #viewHighscores:hover {
